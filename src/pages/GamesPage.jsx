@@ -597,6 +597,7 @@ export default function GamesPage() {
     setTimeLeft(difficultyMeta.gameSeconds)
     const timer = window.setInterval(() => {
       setTimeLeft((current) => {
+        if (gameAwardedRef.current) return current;
         if (current <= 1) {
           window.clearInterval(timer)
           if (!gameAwardedRef.current) {

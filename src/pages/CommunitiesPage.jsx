@@ -1771,7 +1771,7 @@ export default function CommunitiesPage() {
                   ))}
                 </section>
 
-                <aside className="space-y-5 lg:sticky lg:top-28 lg:self-start">
+                <aside className="hidden lg:block space-y-5 lg:sticky lg:top-28 lg:self-start">
                   <section className="theme-card rounded-[30px] border border-white/50 bg-white/38 p-5 shadow-[0_22px_70px_rgba(9,47,100,0.10)] backdrop-blur-2xl">
                     <p className="text-xs font-black uppercase tracking-[0.18em] text-[#468BE6]">Gerçek zamanlı</p>
                     <h2 className="theme-title mt-2 text-2xl font-black text-[#092F64]">Grup hareketi</h2>

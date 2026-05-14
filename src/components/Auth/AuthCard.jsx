@@ -130,7 +130,7 @@ function getPasswordIssues(password) {
     issues.push('sayı')
   }
 
-  if (!/[^\w\sçğıöşüÇĞİÖŞÜ]/.test(password)) {
+  if (!/[^a-zA-Z0-9\sçğıöşüÇĞİÖŞÜ]/.test(password)) {
     issues.push('özel karakter')
   }
 
@@ -767,7 +767,7 @@ export default function AuthCard({ onMascotState, onSuccess }) {
 
         <div className="mb-6">
           <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#468BE6]">
-            {mode === 'login' ? 'Tekrar hoş geldin' : 'Kampüse katıl'}
+            {mode === 'login' ? 'Hoş geldin' : 'Kampüse katıl'}
           </p>
           <h1 className="mt-2 text-4xl font-black tracking-normal text-[#092F64]">
             {mode === 'login' ? 'Spotların seni bekliyor.' : 'İlk spotunu beraber açalım.'}

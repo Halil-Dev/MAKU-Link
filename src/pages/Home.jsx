@@ -121,7 +121,7 @@ export default function Home() {
       <main className="relative z-10 mx-auto grid w-full max-w-[1560px] grid-cols-1 gap-6 px-4 py-7 pb-28 lg:grid-cols-[280px_minmax(0,1fr)_380px] lg:px-8 lg:pb-10">
         
         {/* SOL KOLON */}
-        <aside className="space-y-5 lg:sticky lg:top-28 lg:self-start">
+        <aside className="hidden lg:block space-y-5 lg:sticky lg:top-28 lg:self-start">
           <div className="rounded-[28px] border border-white/40 bg-white/30 p-4 shadow-sm backdrop-blur-2xl">
             <SectionTitle eyebrow="Kısayollar" title="Kampüs" />
             <div className="space-y-1.5">
@@ -206,7 +206,7 @@ onComment={(spotId, commentText) => createCampusSpotComment({ spotId, text: comm
           </div>
         </section>
 
-        <aside className="space-y-5 lg:sticky lg:top-28 lg:self-start">
+        <aside className="hidden lg:block space-y-5 lg:sticky lg:top-28 lg:self-start">
           <section className="rounded-[28px] border border-white/45 bg-white/48 p-4 shadow-sm backdrop-blur-xl">
             <SectionTitle eyebrow="Yakında" title="Spot bırakanlar" />
             <div className="grid grid-cols-3 gap-3">

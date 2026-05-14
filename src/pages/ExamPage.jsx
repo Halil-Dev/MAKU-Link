@@ -410,6 +410,7 @@ export default function ExamPage() {
                     value={joinCode}
                     onChange={(event) => setJoinCode(event.target.value.toUpperCase())}
                     placeholder="Kod"
+                    maxLength={6}
                     className="theme-input min-w-0 flex-1 rounded-2xl border border-white/55 bg-[#E9F5FF]/62 px-4 py-3 text-sm font-black text-[#092F64] outline-none"
                   />
                   <button

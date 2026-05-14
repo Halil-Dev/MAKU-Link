@@ -16,8 +16,8 @@ import {
 import { auth, db } from '../FireBase/firebaseConfig.js'
 
 const allowedSpotTypes = new Set(['study', 'coffee', 'duo', 'quiz', 'event', 'game'])
-const allowedSpotLocations = new Set(['Söylemek istemiyorum', 'Kampüs', 'Kafeterya', 'Kütüphane', 'BM Fakültesi', 'Amfi', 'Bahçe'])
-const allowedReactions = new Set(['pin', 'coffee', 'wave', 'heart', 'book', 'game'])
+const allowedSpotLocations = new Set(['Söylemek istemiyorum', 'Kampüs', 'Kafeterya', 'Kütüphane', 'BM Fakültesi', 'Amfi', 'Bahçe', 'Ring', 'Fakülte', 'Yurt önü'])
+const allowedReactions = new Set(['pin', 'coffee', 'wave', 'heart', 'book', 'game', 'fire'])
 
 const normalizeText = (value = '', maxLength) => String(value || '').trim().replace(/\s+/g, ' ').slice(0, maxLength)
 
