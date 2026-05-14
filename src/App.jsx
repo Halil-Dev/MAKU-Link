@@ -21,7 +21,7 @@ import { syncPublicProfile } from './services/publicProfileService.js'
 
 const LOADING_DURATION_MS = 6000 
 
-function AnimatedRoutes({ isAuthenticated }) {
+function AnimatedRoutes({ isAuthenticated, onAuthenticated }) {
   const location = useLocation();
 
   return (
@@ -38,7 +38,7 @@ function AnimatedRoutes({ isAuthenticated }) {
           {/* Giriş Yapmamış Kullanıcı */}
           <Route 
             path="/login" 
-            element={!isAuthenticated ? <LoginPage /> : <Navigate to="/" />} 
+            element={!isAuthenticated ? <LoginPage onAuthenticated={onAuthenticated} /> : <Navigate to="/" />} 
           />
 
           {/* Giriş Yapmış Kullanıcı Rotaları */}
@@ -128,7 +128,10 @@ export default function App() {
   return (
     <Router>
       <div className="min-h-screen bg-[#E9F5FF]">
-        <AnimatedRoutes isAuthenticated={isAuthenticated} />
+        <AnimatedRoutes 
+          isAuthenticated={isAuthenticated} 
+          onAuthenticated={() => setIsAuthenticated(true)} 
+        />
       </div>
     </Router>
   )
