@@ -215,7 +215,7 @@ onComment={(spotId, commentText) => createCampusSpotComment({ spotId, text: comm
                   <div className="relative p-0.5 rounded-full bg-gradient-to-tr from-[#468BE6] to-[#93BFEF] transition-transform group-hover:scale-105">
                     <img src={getAvatarById(s.authorAvatarId).src} className="h-14 w-14 rounded-full border-2 border-white object-cover" alt="user" />
                   </div>
-                  <span className="mt-2 text-[10px] font-black text-[#092F64] truncate w-full text-center">{s.authorName.split(' ')[0]}</span>
+                  <span className="mt-2 text-[10px] font-black text-[#092F64] truncate w-full text-center">{(s.authorName || 'Kullanıcı').split(' ')[0]}</span>
                 </button>
               ))}
             </div>
