@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { onAuthStateChanged } from 'firebase/auth'
@@ -23,6 +23,13 @@ const LOADING_DURATION_MS = 6000
 
 function AnimatedRoutes({ isAuthenticated, onAuthenticated }) {
   const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated && location.pathname === '/login') {
+      navigate('/', { replace: true });
+    }
+  }, [isAuthenticated, location.pathname, navigate]);
 
   return (
     <AnimatePresence mode="wait">
@@ -38,7 +45,7 @@ function AnimatedRoutes({ isAuthenticated, onAuthenticated }) {
           {/* Giriş Yapmamış Kullanıcı */}
           <Route 
             path="/login" 
-            element={!isAuthenticated ? <LoginPage onAuthenticated={onAuthenticated} /> : <Navigate to="/" />} 
+            element={<LoginPage onAuthenticated={onAuthenticated} />} 
           />
 
           {/* Giriş Yapmış Kullanıcı Rotaları */}
