@@ -1,0 +1,152 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #e9f5ff;
+  text-rendering: geometricPrecision;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+  background: #1f1f1f;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background: #e9f5ff;
+}
+
+body {
+  min-height: 100%;
+  margin: 0;
+  background: #e9f5ff;
+}
+
+html[data-theme="dark"] body {
+  background:
+    radial-gradient(circle at 14% 8%, rgba(70, 139, 230, 0.28), transparent 28%),
+    radial-gradient(circle at 84% 12%, rgba(147, 191, 239, 0.16), transparent 32%),
+    linear-gradient(135deg, #092f64 0%, #1a5799 42%, #1f1f1f 100%);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+::selection {
+  color: #092f64;
+  background: #e9f5ff;
+}
+
+html[data-motion="reduced"] *,
+html[data-motion="reduced"] *::before,
+html[data-motion="reduced"] *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  scroll-behavior: auto !important;
+  transition-duration: 0.001ms !important;
+}
+
+html[data-feed-density="compact"] main {
+  gap: 0.75rem !important;
+}
+
+html[data-feed-density="compact"] [class*="rounded-[30px]"],
+html[data-feed-density="compact"] [class*="rounded-[34px]"] {
+  padding: 0.9rem !important;
+}
+
+html[data-data-saver="on"] .ambient-blob {
+  display: none !important;
+}
+
+.app-page {
+  background-color: #e9f5ff;
+  color: #1f1f1f;
+}
+
+html[data-theme="dark"] .app-page {
+  background:
+    radial-gradient(circle at 12% 8%, rgba(70, 139, 230, 0.30), transparent 28%),
+    radial-gradient(circle at 82% 18%, rgba(147, 191, 239, 0.16), transparent 30%),
+    linear-gradient(135deg, #092f64 0%, #1a5799 48%, #1f1f1f 100%);
+  color: #e9f5ff;
+}
+
+html[data-theme="dark"] .theme-surface {
+  background-color: rgba(233, 245, 255, 0.16) !important;
+  border-color: rgba(233, 245, 255, 0.24) !important;
+}
+
+html[data-theme="dark"] .theme-card {
+  background-color: rgba(233, 245, 255, 0.11) !important;
+  border-color: rgba(233, 245, 255, 0.24) !important;
+  color: #e9f5ff !important;
+  box-shadow: 0 22px 72px rgba(0, 0, 0, 0.20) !important;
+}
+
+html[data-theme="dark"] .theme-soft {
+  background-color: rgba(233, 245, 255, 0.09) !important;
+  border-color: rgba(233, 245, 255, 0.20) !important;
+  color: #e9f5ff !important;
+}
+
+html[data-theme="dark"] .theme-title {
+  color: #e9f5ff !important;
+}
+
+html[data-theme="dark"] .theme-muted {
+  color: rgba(233, 245, 255, 0.76) !important;
+}
+
+html[data-theme="dark"] .theme-input {
+  background-color: rgba(233, 245, 255, 0.10) !important;
+  border-color: rgba(147, 191, 239, 0.28) !important;
+  color: #e9f5ff !important;
+}
+
+html[data-theme="dark"] .theme-input::placeholder {
+  color: rgba(233, 245, 255, 0.42) !important;
+}
+
+html[data-theme="dark"] [class*="bg-white/"] {
+  background-color: rgba(233, 245, 255, 0.11) !important;
+  border-color: rgba(233, 245, 255, 0.22) !important;
+}
+
+html[data-theme="dark"] [class*="bg-[#E9F5FF"] {
+  background-color: rgba(233, 245, 255, 0.13) !important;
+}
+
+html[data-theme="dark"] [class*="text-[#092F64"] {
+  color: #e9f5ff !important;
+}
+
+html[data-theme="dark"] [class*="text-[#1F1F1F"] {
+  color: rgba(233, 245, 255, 0.72) !important;
+}
+
+html[data-theme="dark"] [class*="text-[#468BE6"] {
+  color: #93bfef !important;
+}
+
+html[data-theme="dark"] [class*="border-white"] {
+  border-color: rgba(233, 245, 255, 0.22) !important;
+}
+
+html[data-theme="dark"] .theme-pill {
+  background-color: rgba(233, 245, 255, 0.12) !important;
+  border-color: rgba(233, 245, 255, 0.22) !important;
+  color: #e9f5ff !important;
+}
+
+html[data-theme="dark"] .theme-pill-muted {
+  color: rgba(233, 245, 255, 0.74) !important;
+}

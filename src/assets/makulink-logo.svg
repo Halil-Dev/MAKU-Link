@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="552" viewBox="0 0 260 140" fill="none">
+  <defs>
+    <filter id="leftArrowGlow" x="-35%" y="-65%" width="170%" height="230%">
+      <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#468BE6" flood-opacity="0.32" />
+    </filter>
+    <filter id="rightArrowGlow" x="-35%" y="-65%" width="170%" height="230%">
+      <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#092F64" flood-opacity="0.22" />
+    </filter>
+  </defs>
+  <path
+    d="M34 88 C62 54 102 44 133 63 C141 68 148 70 156 70 L134 52 L156 70 L139 94"
+    stroke="#93BFEF"
+    stroke-width="18"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    filter="url(#leftArrowGlow)"
+  />
+  <path
+    d="M226 52 C198 86 158 96 127 77 C119 72 112 70 104 70 L126 88 L104 70 L121 46"
+    stroke="#468BE6"
+    stroke-width="18"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    filter="url(#rightArrowGlow)"
+  />
+</svg>
