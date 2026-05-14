@@ -124,7 +124,7 @@ function DifficultyPicker({ title, subtitle, onSelect, onCancel }) {
   )
 }
 
-// --- OYUN 1: MAKÜ-SOS (TicTacToe) ---
+
 function TicTacToe({ onExit, difficulty, onComplete }) {
   const [board, setBoard] = useState(Array(9).fill(null))
   const [isXNext, setIsXNext] = useState(true)
@@ -184,7 +184,7 @@ function TicTacToe({ onExit, difficulty, onComplete }) {
   )
 }
 
-// --- OYUN 2: HAFIZA KARTLARI (Memory Game) ---
+
 function MemoryGame({ onExit, difficulty, onComplete, symbols }) {
   const [cards, setCards] = useState([])
   const [flipped, setFlipped] = useState([])
@@ -366,7 +366,7 @@ function MathRushGame({ onExit, difficulty, onComplete }) {
   )
 }
 
-// --- OYUN 3: KAMPÜS KELİME (Güncellenmiş Wordle) ---
+
 function normalizeWordEntry(item) {
   if (typeof item === 'string') {
     return {
@@ -540,7 +540,7 @@ function WordleGame({ onExit, difficulty, onComplete, words }) {
   )
 }
 
-// --- ANA GAMES PAGE BİLEŞENİ ---
+
 export default function GamesPage() {
   const navigate = useNavigate()
   const [activeGame, setActiveGame] = useState(null)

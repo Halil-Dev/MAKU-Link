@@ -120,7 +120,7 @@ export default function Home() {
 
       <main className="relative z-10 mx-auto grid w-full max-w-[1560px] grid-cols-1 gap-6 px-4 py-7 pb-28 lg:grid-cols-[280px_minmax(0,1fr)_380px] lg:px-8 lg:pb-10">
         
-        {/* SOL KOLON */}
+
         <aside className="hidden lg:block space-y-5 lg:sticky lg:top-28 lg:self-start">
           <div className="rounded-[28px] border border-white/40 bg-white/30 p-4 shadow-sm backdrop-blur-2xl">
             <SectionTitle eyebrow="Kısayollar" title="Kampüs" />
@@ -159,7 +159,7 @@ export default function Home() {
           </div>
         </aside>
 
-        {/* ORTA KOLON */}
+
         <section className="space-y-5">
           <header>
             <p className="text-xs font-black uppercase tracking-[0.18em] text-[#468BE6]">Canlı akış</p>
