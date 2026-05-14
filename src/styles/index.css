@@ -157,7 +157,7 @@ html[data-theme="dark"] .bg-white {
   border-color: rgba(233, 245, 255, 0.22) !important;
 }
 
-html[data-theme="dark"] .bg-\\[\\#092F64\\] {
+html[data-theme="dark"] .bg-\[\#092F64\] {
   background-color: rgba(70, 139, 230, 0.45) !important;
   color: #e9f5ff !important;
 }

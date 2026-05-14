@@ -343,7 +343,7 @@ export default function Navbar() {
       </motion.header>
 
       <nav className="fixed inset-x-3 bottom-3 z-50 rounded-[28px] border border-[#092F64]/[0.08] bg-[#E9F5FF]/85 p-2 shadow-[0_18px_55px_rgba(9,47,100,0.18)] backdrop-blur-2xl lg:hidden">
-        <div className="flex gap-1 overflow-x-auto pb-0.5 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+        <div className="flex w-full justify-between gap-0.5 pb-0.5">
           {navItems.map((item) => {
             const isActive = location.pathname === item.path
 
@@ -352,12 +352,12 @@ export default function Navbar() {
                 key={item.label}
                 type="button"
                 onClick={() => navigate(item.path)} 
-                className={`flex min-h-12 min-w-[74px] flex-col items-center justify-center gap-1 rounded-2xl px-2 text-[10px] font-semibold transition ${
+                className={`flex min-h-12 flex-1 min-w-0 flex-col items-center justify-center gap-1 rounded-2xl text-[9px] font-semibold transition ${
                   isActive ? 'bg-[#092F64] text-[#E9F5FF]' : 'text-[#092F64]/70'
                 } disabled:opacity-50`}
                 >
                 <Icon name={item.icon} className="h-5 w-5" />
-                <span>{item.path === '/leaderboard' ? 'Puan' : item.path === '/communities' ? 'Topluluk' : item.label}</span>
+                <span className="truncate w-full text-center">{item.path === '/leaderboard' ? 'Puan' : item.path === '/communities' ? 'Topluluk' : item.label}</span>
               </button>
             )
           })}
