@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { doc, onSnapshot } from 'firebase/firestore'
 import Navbar from '../components/Navbar/Navbar.jsx'
+import Footer from '../components/Footer/Footer.jsx'
 import { auth, db } from '../FireBase/firebaseConfig.js'
 import { getAvatarById } from '../data/avatarOptions.js'
 import {
@@ -1809,6 +1810,7 @@ export default function CommunitiesPage() {
           )}
         </AnimatePresence>
       </main>
+      <Footer />
     </section>
   )
 }

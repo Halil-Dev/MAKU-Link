@@ -9,6 +9,7 @@ import { SPOT_TYPES, SHORTCUT_ITEMS } from '../data/constants.js';
 import HomeBackground from "../components/Home/HomeBackground.jsx";
 import SpotBox from "../components/Home/SpotBox.jsx";
 import SpotCard from "../components/Home/SpotCard.jsx";
+import Footer from "../components/Footer/Footer.jsx";
 
 import { subscribeCommunities } from '../services/communityService.js'
 import { recordSpotResult } from '../services/gameService.js'
@@ -230,6 +231,8 @@ onComment={(spotId, commentText) => createCampusSpotComment({ spotId, text: comm
         </aside>
 
       </main>
+      
+      <Footer />
     </section>
   )
 }
