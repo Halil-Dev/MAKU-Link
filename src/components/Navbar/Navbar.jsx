@@ -219,9 +219,9 @@ export default function Navbar() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       >
-        <nav className="theme-card mx-auto flex min-h-24 w-full max-w-[1680px] items-center justify-between gap-5 rounded-[34px] border border-white/45 bg-[#E9F5FF]/72 px-5 shadow-[0_20px_70px_rgba(9,47,100,0.12)] backdrop-blur-2xl sm:px-7 lg:px-8 xl:px-10">
+        <nav className="theme-card mx-auto flex min-h-24 w-full max-w-[1680px] items-center justify-between gap-3 sm:gap-5 rounded-[34px] border border-white/45 bg-[#E9F5FF]/72 px-3 sm:px-7 lg:px-8 xl:px-10 shadow-[0_20px_70px_rgba(9,47,100,0.12)] backdrop-blur-2xl">
           <button type="button" onClick={() => navigate('/')} className="flex min-w-fit items-center gap-3 text-left">
-            <div className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-[18px] border border-white/60 bg-[#E9F5FF] shadow-[0_14px_34px_rgba(9,47,100,0.20)]">
+            <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center overflow-hidden rounded-[18px] border border-white/60 bg-[#E9F5FF] shadow-[0_14px_34px_rgba(9,47,100,0.20)]">
               <img
                 src={makulinkLogo}
                 alt="MAKÜLink logo"
@@ -232,7 +232,7 @@ export default function Navbar() {
               <p className="theme-title text-lg font-semibold text-[#092F64]">
                 MAKÜ<span className="text-[#468BE6]">Link</span>
               </p>
-              <p className="theme-muted text-xs font-medium text-[#1F1F1F]/60">Spot bırak, kampüsü yakala</p>
+              <p className="theme-muted hidden sm:block text-xs font-medium text-[#1F1F1F]/60">Spot bırak, kampüsü yakala</p>
             </div>
           </button>
 
@@ -308,7 +308,7 @@ export default function Navbar() {
             <button
               type="button"
               onClick={() => navigate('/notifications')}
-              className="theme-pill relative flex h-12 w-12 items-center justify-center rounded-full border border-white/55 bg-white/50 text-[#092F64] shadow-[0_12px_30px_rgba(9,47,100,0.08)] backdrop-blur-xl transition hover:-translate-y-0.5 hover:bg-white"
+              className="theme-pill relative flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full border border-white/55 bg-white/50 text-[#092F64] shadow-[0_12px_30px_rgba(9,47,100,0.08)] backdrop-blur-xl transition hover:-translate-y-0.5 hover:bg-white"
               aria-label="Bildirimleri aç"
             >
               <Icon name="bell" className="h-5 w-5" />
@@ -321,7 +321,7 @@ export default function Navbar() {
             <button
               type="button"
               onClick={() => navigate('/settings')}
-              className="theme-pill flex h-12 w-12 items-center justify-center rounded-full border border-white/55 bg-white/50 text-[#092F64] shadow-[0_12px_30px_rgba(9,47,100,0.08)] backdrop-blur-xl transition hover:-translate-y-0.5 hover:rotate-12 hover:bg-white"
+              className="theme-pill flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full border border-white/55 bg-white/50 text-[#092F64] shadow-[0_12px_30px_rgba(9,47,100,0.08)] backdrop-blur-xl transition hover:-translate-y-0.5 hover:rotate-12 hover:bg-white"
               aria-label="Ayarları aç"
             >
               <Icon name="settings" className="h-5 w-5" />
@@ -329,7 +329,7 @@ export default function Navbar() {
             <button
               type="button"
               onClick={() => navigate('/profile')}
-              className="h-12 w-12 overflow-hidden rounded-full border border-white bg-[#93BFEF] text-sm font-bold text-[#092F64] shadow-[0_12px_30px_rgba(9,47,100,0.12)] transition hover:-translate-y-0.5 hover:scale-105"
+              className="h-10 w-10 sm:h-12 sm:w-12 overflow-hidden rounded-full border border-white bg-[#93BFEF] text-sm font-bold text-[#092F64] shadow-[0_12px_30px_rgba(9,47,100,0.12)] transition hover:-translate-y-0.5 hover:scale-105"
             >
               <img
                 src={selectedAvatar.src}
@@ -343,7 +343,7 @@ export default function Navbar() {
       </motion.header>
 
       <nav className="fixed inset-x-3 bottom-3 z-50 rounded-[28px] border border-[#092F64]/[0.08] bg-[#E9F5FF]/85 p-2 shadow-[0_18px_55px_rgba(9,47,100,0.18)] backdrop-blur-2xl lg:hidden">
-        <div className="flex gap-1 overflow-x-auto pb-0.5">
+        <div className="flex gap-1 overflow-x-auto pb-0.5 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
           {navItems.map((item) => {
             const isActive = location.pathname === item.path
 

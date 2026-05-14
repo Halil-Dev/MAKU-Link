@@ -107,7 +107,7 @@ export default function Home() {
   }
 
   return (
-    <section className="app-page relative min-h-screen overflow-hidden bg-[#E9F5FF] text-[#1F1F1F]">
+    <section className="app-page relative min-h-screen overflow-x-hidden bg-[#E9F5FF] text-[#1F1F1F]">
       <HomeBackground />
 
       <Navbar/>
@@ -118,7 +118,7 @@ export default function Home() {
         </motion.div>
       )}
 
-      <main className="relative z-10 mx-auto grid w-full max-w-[1560px] grid-cols-1 gap-6 px-4 py-7 pb-28 lg:grid-cols-[280px_minmax(0,1fr)_380px] lg:px-8 lg:pb-10">
+      <main className="relative z-10 mx-auto grid w-full max-w-[1560px] grid-cols-1 gap-6 px-4 py-7 pb-32 lg:grid-cols-[280px_minmax(0,1fr)_380px] lg:px-8 lg:pb-10">
         
 
         <aside className="hidden lg:block space-y-5 lg:sticky lg:top-28 lg:self-start">

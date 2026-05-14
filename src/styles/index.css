@@ -150,3 +150,14 @@ html[data-theme="dark"] .theme-pill {
 html[data-theme="dark"] .theme-pill-muted {
   color: rgba(233, 245, 255, 0.74) !important;
 }
+
+html[data-theme="dark"] .bg-white {
+  background-color: rgba(233, 245, 255, 0.12) !important;
+  color: #e9f5ff !important;
+  border-color: rgba(233, 245, 255, 0.22) !important;
+}
+
+html[data-theme="dark"] .bg-\\[\\#092F64\\] {
+  background-color: rgba(70, 139, 230, 0.45) !important;
+  color: #e9f5ff !important;
+}
