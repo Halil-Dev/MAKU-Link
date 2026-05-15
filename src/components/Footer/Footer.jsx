@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import makulinkLogo from '../../assets/ChatGPT Image 7 May 2026 22_31_53.png'
+import makulinkLogo from '../../assets/logo-main.png'
 
 export default function Footer() {
   const navigate = useNavigate()
