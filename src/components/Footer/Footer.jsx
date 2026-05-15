@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import makulinkLogo from '../../assets/logo-main.png'
+import makulinkLogo from '../../assets/logo-main.webp'
 
 export default function Footer() {
   const navigate = useNavigate()

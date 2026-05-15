@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { useNavigate, useLocation } from 'react-router-dom' // Yeni ekledik
 import { collection, doc, limit, onSnapshot, query } from 'firebase/firestore'
-import makulinkLogo from '../../assets/logo-main.png'
+import makulinkLogo from '../../assets/logo-main.webp'
 import { auth, db } from '../../FireBase/firebaseConfig.js'
 import { getAvatarById } from '../../data/avatarOptions.js'
 

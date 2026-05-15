@@ -45,7 +45,7 @@ function ArrowLinkLogo() {
           scale: [0.98, 1, 1, 1.04, 1],
         }}
         transition={{
-          duration: 3,
+          duration: 0.8,
           times: [0, 0.34, 0.8, 0.93, 1],
           ease: easeOut,
         }}
@@ -75,7 +75,7 @@ function ArrowLinkLogo() {
           scale: [0.98, 1, 1, 1.04, 1],
         }}
         transition={{
-          duration: 3,
+          duration: 0.8,
           times: [0, 0.34, 0.8, 0.93, 1],
           ease: easeOut,
         }}
@@ -90,7 +90,7 @@ export default function LoadingScreen() {
       className="fixed inset-0 z-50 flex min-h-screen items-center justify-center overflow-hidden"
       initial={{ opacity: 1 }}
       exit={{ opacity: 0, filter: 'blur(10px)' }}
-      transition={{ duration: 0.9, ease: easeOut }}
+      transition={{ duration: 0.4, ease: easeOut }}
     >
       <div className="absolute inset-0 bg-[#E9F5FF]" />
 
@@ -100,7 +100,7 @@ export default function LoadingScreen() {
           className="mt-8 text-center"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 3.15, duration: 0.72, ease: easeOut }}
+          transition={{ delay: 0.65, duration: 0.5, ease: easeOut }}
         >
           <p className="text-xl font-semibold tracking-normal sm:text-2xl">
             <span className="text-[#092F64]">MAKÜ</span>

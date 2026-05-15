@@ -1,8 +1,8 @@
-import manAvatar from '../assets/man.png'
-import man2Avatar from '../assets/man2.png'
-import womenAvatar from '../assets/women.png'
-import women2Avatar from '../assets/women2.png'
-import women3Avatar from '../assets/women3.png'
+import manAvatar from '../assets/man.webp'
+import man2Avatar from '../assets/man2.webp'
+import womenAvatar from '../assets/women.webp'
+import women2Avatar from '../assets/women2.webp'
+import women3Avatar from '../assets/women3.webp'
 
 export const avatarOptions = [
   { id: 'women', label: 'Kadın', src: womenAvatar },

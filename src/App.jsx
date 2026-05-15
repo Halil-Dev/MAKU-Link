@@ -19,7 +19,7 @@ import { auth, db } from './FireBase/firebaseConfig.js'
 import { syncDailyCampusNotifications } from './services/notificationService.js'
 import { syncPublicProfile } from './services/publicProfileService.js'
 
-const LOADING_DURATION_MS = 6000
+const LOADING_DURATION_MS = 1500
 
 function AnimatedRoutes({ isAuthenticated, onAuthenticated }) {
   const location = useLocation();
