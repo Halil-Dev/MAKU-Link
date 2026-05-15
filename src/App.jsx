@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { onAuthStateChanged } from 'firebase/auth'
@@ -19,17 +19,10 @@ import { auth, db } from './FireBase/firebaseConfig.js'
 import { syncDailyCampusNotifications } from './services/notificationService.js'
 import { syncPublicProfile } from './services/publicProfileService.js'
 
-const LOADING_DURATION_MS = 6000 
+const LOADING_DURATION_MS = 6000
 
 function AnimatedRoutes({ isAuthenticated, onAuthenticated }) {
   const location = useLocation();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (isAuthenticated && location.pathname === '/login') {
-      navigate('/', { replace: true });
-    }
-  }, [isAuthenticated, location.pathname, navigate]);
 
   return (
     <AnimatePresence mode="wait">
@@ -43,9 +36,9 @@ function AnimatedRoutes({ isAuthenticated, onAuthenticated }) {
       >
         <Routes location={location}>
           {/* Giriş Yapmamış Kullanıcı */}
-          <Route 
-            path="/login" 
-            element={<LoginPage onAuthenticated={onAuthenticated} />} 
+          <Route
+            path="/login"
+            element={!isAuthenticated ? <LoginPage onAuthenticated={onAuthenticated} /> : <Navigate to="/" replace />}
           />
 
           {/* Giriş Yapmış Kullanıcı Rotaları */}
@@ -58,7 +51,7 @@ function AnimatedRoutes({ isAuthenticated, onAuthenticated }) {
           <Route path="/leaderboard" element={isAuthenticated ? <LeaderboardPage /> : <Navigate to="/login" />} />
           <Route path="/notifications" element={isAuthenticated ? <NotificationsPage /> : <Navigate to="/login" />} />
           <Route path="/communities" element={isAuthenticated ? <CommunitiesPage /> : <Navigate to="/login" />} />
-          
+
           {/* Parametreli Rotalar (User ID URL'den gelecek) */}
           <Route path="/user/:uid" element={isAuthenticated ? <PublicProfilePage /> : <Navigate to="/login" />} />
 
@@ -74,6 +67,9 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(true)
   const [isAuthReady, setIsAuthReady] = useState(false)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const setAuthStateFromUser = (user) => {
+    setIsAuthenticated(Boolean(user?.emailVerified))
+  }
 
   useEffect(() => {
     if (!isAuthenticated || !auth.currentUser) {
@@ -92,7 +88,7 @@ export default function App() {
         document.documentElement.dataset.dataSaver = settings.dataSaver ? 'on' : 'off'
 
         if (userData) {
-          syncPublicProfile(auth.currentUser.uid, userData).catch(() => {})
+          syncPublicProfile(auth.currentUser.uid, userData).catch(() => { })
         }
       },
       (error) => console.warn('Sync error:', error)
@@ -105,18 +101,40 @@ export default function App() {
   }, [])
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setIsAuthenticated(Boolean(user?.emailVerified))
+    let isMounted = true
+
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        if (isMounted) {
+          setIsAuthenticated(false)
+          setIsAuthReady(true)
+        }
+        return
+      }
+
+      try {
+        await user.reload()
+      } catch { }
+
+      if (!isMounted) {
+        return
+      }
+
+      setIsAuthenticated(Boolean(auth.currentUser?.emailVerified))
       setIsAuthReady(true)
     })
-    return unsubscribe
+
+    return () => {
+      isMounted = false
+      unsubscribe()
+    }
   }, [])
 
   useEffect(() => {
     if (!isAuthenticated || !auth.currentUser) return undefined
 
     const syncNotifications = () => {
-      syncDailyCampusNotifications(auth.currentUser.uid).catch(() => {})
+      syncDailyCampusNotifications(auth.currentUser.uid).catch(() => { })
     }
 
     syncNotifications()
@@ -135,10 +153,7 @@ export default function App() {
   return (
     <Router>
       <div className="min-h-screen bg-[#E9F5FF]">
-        <AnimatedRoutes 
-          isAuthenticated={isAuthenticated} 
-          onAuthenticated={() => setIsAuthenticated(true)} 
-        />
+        <AnimatedRoutes isAuthenticated={isAuthenticated} onAuthenticated={setAuthStateFromUser} />
       </div>
     </Router>
   )

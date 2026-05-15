@@ -124,7 +124,7 @@ function DifficultyPicker({ title, subtitle, onSelect, onCancel }) {
   )
 }
 
-
+// --- OYUN 1: MAKÜ-SOS (TicTacToe) ---
 function TicTacToe({ onExit, difficulty, onComplete }) {
   const [board, setBoard] = useState(Array(9).fill(null))
   const [isXNext, setIsXNext] = useState(true)
@@ -134,7 +134,7 @@ function TicTacToe({ onExit, difficulty, onComplete }) {
   const isDraw = !winner && board.every(square => square !== null)
 
   function calculateWinner(squares) {
-    const lines = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
+    const lines = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
     for (let i = 0; i < lines.length; i++) {
       const [a, b, c] = lines[i]
       if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) return squares[a]
@@ -184,7 +184,7 @@ function TicTacToe({ onExit, difficulty, onComplete }) {
   )
 }
 
-
+// --- OYUN 2: HAFIZA KARTLARI (Memory Game) ---
 function MemoryGame({ onExit, difficulty, onComplete, symbols }) {
   const [cards, setCards] = useState([])
   const [flipped, setFlipped] = useState([])
@@ -201,7 +201,7 @@ function MemoryGame({ onExit, difficulty, onComplete, symbols }) {
     if (flipped.length === 2 || flipped.includes(index) || solved.includes(index)) return
     const newFlipped = [...flipped, index]
     setFlipped(newFlipped)
-    
+
     if (newFlipped.length === 2) {
       if (cards[newFlipped[0]] === cards[newFlipped[1]]) {
         setSolved([...solved, ...newFlipped])
@@ -226,12 +226,11 @@ function MemoryGame({ onExit, difficulty, onComplete, symbols }) {
       </h2>
       <div className="grid grid-cols-4 gap-3">
         {cards.map((emoji, i) => (
-          <button 
-            key={i} 
+          <button
+            key={i}
             onClick={() => handleCardClick(i)}
-            className={`h-16 w-16 sm:h-20 sm:w-20 rounded-2xl flex items-center justify-center text-2xl transition-all duration-300 shadow-lg ${
-              flipped.includes(i) || solved.includes(i) ? 'bg-white rotate-0' : 'bg-[#092F64] rotate-180'
-            }`}
+            className={`h-16 w-16 sm:h-20 sm:w-20 rounded-2xl flex items-center justify-center text-2xl transition-all duration-300 shadow-lg ${flipped.includes(i) || solved.includes(i) ? 'bg-white rotate-0' : 'bg-[#092F64] rotate-180'
+              }`}
           >
             {(flipped.includes(i) || solved.includes(i)) ? emoji : '❓'}
           </button>
@@ -285,9 +284,8 @@ function ReactionGame({ onExit, difficulty }) {
       <button
         type="button"
         onClick={phase === 'ready' || phase === 'done' ? startRound : handleTap}
-        className={`mt-8 flex h-44 w-full items-center justify-center rounded-[34px] text-3xl font-black transition ${
-          phase === 'go' ? 'bg-[#468BE6] text-[#E9F5FF] shadow-[0_0_40px_rgba(70,139,230,0.45)]' : 'bg-[#E9F5FF]/80 text-[#092F64]'
-        }`}
+        className={`mt-8 flex h-44 w-full items-center justify-center rounded-[34px] text-3xl font-black transition ${phase === 'go' ? 'bg-[#468BE6] text-[#E9F5FF] shadow-[0_0_40px_rgba(70,139,230,0.45)]' : 'bg-[#E9F5FF]/80 text-[#092F64]'
+          }`}
       >
         {phase === 'ready' && 'Başlat'}
         {phase === 'waiting' && 'Bekle...'}
@@ -366,7 +364,7 @@ function MathRushGame({ onExit, difficulty, onComplete }) {
   )
 }
 
-
+// --- OYUN 3: KAMPÜS KELİME (Güncellenmiş Wordle) ---
 function normalizeWordEntry(item) {
   if (typeof item === 'string') {
     return {
@@ -482,8 +480,8 @@ function WordleGame({ onExit, difficulty, onComplete, words }) {
           const displayWord = isCurrent ? currentGuess.padEnd(5, ' ') : guess
 
           return (
-            <motion.div 
-              key={i} 
+            <motion.div
+              key={i}
               className="flex gap-2"
               animate={shakeRow === i ? { x: [-10, 10, -10, 10, 0] } : {}}
               transition={{ duration: 0.4 }}
@@ -506,22 +504,22 @@ function WordleGame({ onExit, difficulty, onComplete, words }) {
 
       <AnimatePresence>
         {isGameOver && (
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }} 
-            animate={{ opacity: 1, y: 0 }} 
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             className="w-full text-center p-6 rounded-[32px] bg-white shadow-2xl border border-[#468BE6]/20 mb-8"
           >
             <p className="text-sm font-bold text-[#092F64]/60 uppercase mb-1">Doğru Cevap</p>
             <h3 className="text-3xl font-black text-[#468BE6] mb-4 tracking-widest">{solution}</h3>
             <div className="flex gap-3 justify-center">
-              <button 
-                onClick={resetGame} 
+              <button
+                onClick={resetGame}
                 className="px-6 py-3 bg-[#092F64] text-white rounded-2xl font-bold hover:scale-105 transition"
               >
                 Tekrar Dene
               </button>
-              <button 
-                onClick={onExit} 
+              <button
+                onClick={onExit}
                 className="px-6 py-3 bg-[#E9F5FF] text-[#092F64] rounded-2xl font-bold hover:bg-[#D4E9FF] transition"
               >
                 Oyunlardan Çık
@@ -540,7 +538,7 @@ function WordleGame({ onExit, difficulty, onComplete, words }) {
   )
 }
 
-
+// --- ANA GAMES PAGE BİLEŞENİ ---
 export default function GamesPage() {
   const navigate = useNavigate()
   const [activeGame, setActiveGame] = useState(null)
@@ -597,7 +595,6 @@ export default function GamesPage() {
     setTimeLeft(difficultyMeta.gameSeconds)
     const timer = window.setInterval(() => {
       setTimeLeft((current) => {
-        if (gameAwardedRef.current) return current;
         if (current <= 1) {
           window.clearInterval(timer)
           if (!gameAwardedRef.current) {
@@ -617,7 +614,7 @@ export default function GamesPage() {
   return (
     <div className="min-h-screen bg-[#E9F5FF]">
       <Navbar />
-      
+
       <main className="mx-auto max-w-[1200px] p-6 pt-24">
         <AnimatePresence mode="wait">
           {!activeGame ? (
@@ -647,34 +644,34 @@ export default function GamesPage() {
               </div>
             </motion.div>
           ) : (
-              <motion.div key="game" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} className="pt-10">
-                <div className="mx-auto mb-5 flex max-w-sm justify-center gap-2">
-                  {scoreMessage && <p className="rounded-full bg-[#E9F5FF]/80 px-4 py-2 text-center text-xs font-black text-[#468BE6]">{scoreMessage}</p>}
-                  <p className="rounded-full bg-[#092F64] px-4 py-2 text-xs font-black text-[#E9F5FF]">
-                    {Math.floor(timeLeft / 60)}:{String(timeLeft % 60).padStart(2, '0')}
-                  </p>
-                </div>
-                <MascotAssist
-                  difficulty={difficulty}
-                  gameId={activeGame}
-                  hint={
-                    activeGame === 'wordle'
-                      ? 'Kelime kutusundaki ipucunu oku; kolay modda ilk harfi de verdim.'
-                      : activeGame === 'memory'
-                        ? 'Açtığın ilk kartı aklında tut, aynı emojiyi sakin yakala.'
-                        : activeGame === 'reaction'
-                          ? 'Mavi sinyal gelmeden basma; beklemek burada puan kazandırır.'
-                          : activeGame === 'mathrush'
-                            ? 'Kolay soruları seri geç, zor sorularda işlem sırasını kaçırma.'
-                            : 'Köşeleri ve ortayı kontrol et, üçlü çizgiyi erken kapat.'
-                  }
-                />
-                {activeGame === 'tictactoe' && <TicTacToe difficulty={difficulty} onComplete={handleGameComplete} onExit={() => setActiveGame(null)} />}
-                {activeGame === 'memory' && <MemoryGame difficulty={difficulty} symbols={gameConfigs.memory?.symbols} onComplete={handleGameComplete} onExit={() => setActiveGame(null)} />}
-                {activeGame === 'wordle' && <WordleGame difficulty={difficulty} words={gameConfigs.wordle?.words} onComplete={handleGameComplete} onExit={() => setActiveGame(null)} />}
-                {activeGame === 'reaction' && <ReactionGame difficulty={difficulty} onExit={() => setActiveGame(null)} />}
-                {activeGame === 'mathrush' && <MathRushGame difficulty={difficulty} onComplete={handleGameComplete} onExit={() => setActiveGame(null)} />}
-              </motion.div>
+            <motion.div key="game" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} className="pt-10">
+              <div className="mx-auto mb-5 flex max-w-sm justify-center gap-2">
+                {scoreMessage && <p className="rounded-full bg-[#E9F5FF]/80 px-4 py-2 text-center text-xs font-black text-[#468BE6]">{scoreMessage}</p>}
+                <p className="rounded-full bg-[#092F64] px-4 py-2 text-xs font-black text-[#E9F5FF]">
+                  {Math.floor(timeLeft / 60)}:{String(timeLeft % 60).padStart(2, '0')}
+                </p>
+              </div>
+              <MascotAssist
+                difficulty={difficulty}
+                gameId={activeGame}
+                hint={
+                  activeGame === 'wordle'
+                    ? 'Kelime kutusundaki ipucunu oku; kolay modda ilk harfi de verdim.'
+                    : activeGame === 'memory'
+                      ? 'Açtığın ilk kartı aklında tut, aynı emojiyi sakin yakala.'
+                      : activeGame === 'reaction'
+                        ? 'Mavi sinyal gelmeden basma; beklemek burada puan kazandırır.'
+                        : activeGame === 'mathrush'
+                          ? 'Kolay soruları seri geç, zor sorularda işlem sırasını kaçırma.'
+                          : 'Köşeleri ve ortayı kontrol et, üçlü çizgiyi erken kapat.'
+                }
+              />
+              {activeGame === 'tictactoe' && <TicTacToe difficulty={difficulty} onComplete={handleGameComplete} onExit={() => setActiveGame(null)} />}
+              {activeGame === 'memory' && <MemoryGame difficulty={difficulty} symbols={gameConfigs.memory?.symbols} onComplete={handleGameComplete} onExit={() => setActiveGame(null)} />}
+              {activeGame === 'wordle' && <WordleGame difficulty={difficulty} words={gameConfigs.wordle?.words} onComplete={handleGameComplete} onExit={() => setActiveGame(null)} />}
+              {activeGame === 'reaction' && <ReactionGame difficulty={difficulty} onExit={() => setActiveGame(null)} />}
+              {activeGame === 'mathrush' && <MathRushGame difficulty={difficulty} onComplete={handleGameComplete} onExit={() => setActiveGame(null)} />}
+            </motion.div>
           )}
         </AnimatePresence>
         <AnimatePresence>

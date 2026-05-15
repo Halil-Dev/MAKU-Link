@@ -11,6 +11,8 @@ const spotTypes = [
   { id: 'game', emoji: '⚡', label: 'Game' },
 ]
 
+const locationOptions = ['Söylemek istemiyorum', 'Kampüs', 'Kafeterya', 'Kütüphane', 'BM Fakültesi', 'Amfi', 'Bahçe']
+
 export default function SpotBox({ profile, onCreate }) {
   const [text, setText] = useState('')
   const [location, setLocation] = useState('Söylemek istemiyorum')
@@ -38,10 +40,10 @@ export default function SpotBox({ profile, onCreate }) {
       transition={{ delay: 0.08, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
     >
       <div className="flex gap-3">
-        <img 
-          src={getAvatarById(profile.avatarId).src} 
-          alt={profile.name} 
-          className="h-12 w-12 rounded-full border-2 border-white object-cover shadow-sm" 
+        <img
+          src={getAvatarById(profile.avatarId).src}
+          alt={profile.name}
+          className="h-12 w-12 rounded-full border-2 border-white object-cover shadow-sm"
         />
         <textarea
           value={text}
@@ -52,27 +54,26 @@ export default function SpotBox({ profile, onCreate }) {
         />
       </div>
 
-      <div className="mt-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-        <div className="flex w-full min-w-0 flex-col sm:flex-row sm:w-auto flex-wrap gap-2">
+      <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
+        <div className="flex flex-wrap gap-2">
           <select
             value={location}
             onChange={(event) => setLocation(event.target.value)}
-            className="w-fit rounded-full border border-white/55 bg-[#E9F5FF]/75 px-3 py-2 text-xs font-black text-[#1A5799] outline-none"
+            className="rounded-full border border-white/55 bg-[#E9F5FF]/75 px-3 py-2 text-xs font-black text-[#1A5799] outline-none"
           >
-            {['Söylemek istemiyorum', 'Kafeterya', 'Kütüphane', 'Ring', 'Bahçe', 'Fakülte', 'Yurt önü'].map((item) => (
+            {locationOptions.map((item) => (
               <option key={item}>{item}</option>
             ))}
           </select>
-          
-          <div className="flex w-full min-w-0 sm:w-auto gap-1.5 overflow-x-auto pb-1 sm:pb-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+
+          <div className="flex gap-1.5 overflow-x-auto pb-1 sm:pb-0">
             {spotTypes.map((item) => (
               <button
                 key={item.id}
                 type="button"
                 onClick={() => setType(item.id)}
-                className={`whitespace-nowrap rounded-full px-3 py-2 text-xs font-black transition ${
-                  type === item.id ? 'bg-[#092F64] text-[#E9F5FF]' : 'bg-[#E9F5FF]/75 text-[#1A5799]'
-                }`}
+                className={`whitespace-nowrap rounded-full px-3 py-2 text-xs font-black transition ${type === item.id ? 'bg-[#092F64] text-[#E9F5FF]' : 'bg-[#E9F5FF]/75 text-[#1A5799]'
+                  }`}
               >
                 {item.emoji} {item.label}
               </button>
@@ -83,7 +84,7 @@ export default function SpotBox({ profile, onCreate }) {
         <button
           type="submit"
           disabled={busy || text.trim().length < 2}
-          className="ml-auto sm:ml-0 shrink-0 rounded-full bg-[#092F64] px-5 py-2.5 text-sm font-black text-[#E9F5FF] transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-45"
+          className="ml-auto rounded-full bg-[#092F64] px-5 py-2.5 text-sm font-black text-[#E9F5FF] transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-45"
         >
           {busy ? 'Ekleniyor...' : 'Spot ekle'}
         </button>

@@ -126,21 +126,28 @@ function LeaderRow({ leader, index }) {
 export default function LeaderboardPage() {
   const [rawLeaders, setRawLeaders] = useState([])
   const [activeLeaderboard, setActiveLeaderboard] = useState('games')
+  const [isLoading, setIsLoading] = useState(true)
+  const [loadError, setLoadError] = useState('')
   const activeType = leaderboardTypes.find((item) => item.id === activeLeaderboard) || leaderboardTypes[0]
 
   useEffect(() => {
-    const leaderboardQuery = query(collection(db, 'publicLeaderboard'), orderBy('totalScore', 'desc'), limit(20))
+    setIsLoading(true)
+    setLoadError('')
+    const leaderboardQuery = query(collection(db, 'publicLeaderboard'), orderBy(activeType.scoreKey, 'desc'), limit(50))
 
     return onSnapshot(
       leaderboardQuery,
       (snapshot) => {
         setRawLeaders(snapshot.docs.map(normalizeLeader))
+        setIsLoading(false)
       },
-      () => {
-        setRawLeaders([])
+      (error) => {
+        console.warn('Leaderboard could not be loaded:', error)
+        setLoadError('Sıralama şu an yüklenemedi. Firestore kurallarını ve bağlantıyı kontrol et.')
+        setIsLoading(false)
       },
     )
-  }, [])
+  }, [activeType.scoreKey])
 
   const leaders = useMemo(() => {
     return rawLeaders
@@ -189,11 +196,10 @@ export default function LeaderboardPage() {
                 key={item.id}
                 type="button"
                 onClick={() => setActiveLeaderboard(item.id)}
-                className={`rounded-[22px] px-5 py-3 text-sm font-black transition ${
-                  activeLeaderboard === item.id
+                className={`rounded-[22px] px-5 py-3 text-sm font-black transition ${activeLeaderboard === item.id
                     ? 'bg-[#092F64] text-[#E9F5FF] shadow-[0_14px_32px_rgba(9,47,100,0.18)]'
                     : 'text-[#092F64]/60 hover:bg-white/44 hover:text-[#092F64]'
-                }`}
+                  }`}
               >
                 {item.emoji} {item.label}
               </button>
@@ -214,12 +220,24 @@ export default function LeaderboardPage() {
             </span>
           </div>
 
-          <PodiumStage leaders={leaders} activeType={activeType} />
+          {isLoading && leaders.length === 0 ? (
+            <div className="theme-card rounded-[34px] border border-white/50 bg-white/36 px-5 py-12 text-center shadow-[0_22px_70px_rgba(9,47,100,0.12)] backdrop-blur-2xl">
+              <TrophyIcon />
+              <p className="mt-4 text-sm font-black text-[#468BE6]">Sıralama yükleniyor...</p>
+            </div>
+          ) : (
+            <PodiumStage leaders={leaders} activeType={activeType} />
+          )}
+          {loadError && (
+            <p className="mt-4 rounded-full border border-white/55 bg-white/45 px-4 py-3 text-center text-sm font-black text-[#092F64]">
+              {loadError}
+            </p>
+          )}
         </section>
 
         <section className="mt-8 grid gap-3">
           {restLeaders.map((leader, index) => (
-            <LeaderRow key={leader.name} leader={leader} index={index} />
+            <LeaderRow key={leader.uid} leader={leader} index={index} />
           ))}
         </section>
       </main>

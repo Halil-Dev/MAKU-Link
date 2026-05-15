@@ -125,9 +125,8 @@ function ActionMenu({ items = [], align = 'right' }) {
       <AnimatePresence>
         {open && (
           <motion.div
-            className={`absolute top-11 z-30 min-w-44 rounded-[18px] border border-white/60 bg-[#E9F5FF]/95 p-2 shadow-[0_18px_55px_rgba(9,47,100,0.18)] backdrop-blur-2xl ${
-              align === 'left' ? 'left-0' : 'right-0'
-            }`}
+            className={`absolute top-11 z-30 min-w-44 rounded-[18px] border border-white/60 bg-[#E9F5FF]/95 p-2 shadow-[0_18px_55px_rgba(9,47,100,0.18)] backdrop-blur-2xl ${align === 'left' ? 'left-0' : 'right-0'
+              }`}
             initial={{ opacity: 0, y: -6, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -6, scale: 0.96 }}
@@ -141,9 +140,8 @@ function ActionMenu({ items = [], align = 'right' }) {
                   setOpen(false)
                   item.onClick()
                 }}
-                className={`block w-full rounded-[14px] px-3 py-2.5 text-left text-sm font-black transition hover:bg-white/75 ${
-                  item.danger ? 'text-[#092F64]' : 'text-[#092F64]'
-                }`}
+                className={`block w-full rounded-[14px] px-3 py-2.5 text-left text-sm font-black transition hover:bg-white/75 ${item.danger ? 'text-[#092F64]' : 'text-[#092F64]'
+                  }`}
               >
                 {item.label}
               </button>
@@ -170,11 +168,10 @@ function ReactionBar({ reactions = {}, onToggle, compact = false }) {
             key={reaction.key}
             type="button"
             onClick={() => onToggle(reaction.key)}
-            className={`rounded-full px-3 py-1.5 text-xs font-black transition ${
-              active
-                ? 'bg-[#092F64] text-[#E9F5FF] shadow-[0_12px_28px_rgba(9,47,100,0.16)]'
-                : 'bg-[#E9F5FF]/75 text-[#1A5799] hover:bg-white/75'
-            }`}
+            className={`rounded-full px-3 py-1.5 text-xs font-black transition ${active
+              ? 'bg-[#092F64] text-[#E9F5FF] shadow-[0_12px_28px_rgba(9,47,100,0.16)]'
+              : 'bg-[#E9F5FF]/75 text-[#1A5799] hover:bg-white/75'
+              }`}
             whileHover={{ y: -2, scale: 1.03 }}
             whileTap={{ scale: 0.94 }}
             title={reaction.label}
@@ -267,9 +264,9 @@ function CommunityCard({ community, index, membership, busy, onOpen, onJoinToggl
                     {community.visibility === 'private' ? 'Private' : 'Public'}
                   </span>
                 </div>
-              <p className="theme-muted mt-1 text-sm font-semibold text-[#1F1F1F]/55">
-                {formatCount(community.memberCount)} üye · {formatCount(community.postCount)} gönderi · {formatCount(community.messageCount)} mesaj
-              </p>
+                <p className="theme-muted mt-1 text-sm font-semibold text-[#1F1F1F]/55">
+                  {formatCount(community.memberCount)} üye · {formatCount(community.postCount)} gönderi · {formatCount(community.messageCount)} mesaj
+                </p>
               </div>
             </div>
 
@@ -312,9 +309,8 @@ function CommunityCard({ community, index, membership, busy, onOpen, onJoinToggl
           onClick={onJoinToggle}
           disabled={busy}
           title={locked ? 'Bu topluluğa erişimin engellenmiş.' : undefined}
-          className={`rounded-full px-5 py-2.5 text-sm font-black transition disabled:cursor-wait disabled:opacity-60 ${
-            joined ? 'bg-[#E9F5FF] text-[#092F64]' : 'bg-[#092F64] text-[#E9F5FF]'
-          }`}
+          className={`rounded-full px-5 py-2.5 text-sm font-black transition disabled:cursor-wait disabled:opacity-60 ${joined ? 'bg-[#E9F5FF] text-[#092F64]' : 'bg-[#092F64] text-[#E9F5FF]'
+            }`}
           whileHover={{ y: -2, scale: 1.02 }}
           whileTap={{ scale: 0.96 }}
         >
@@ -508,13 +504,13 @@ function PostComment({ comment, isManager, onDeleteComment, onUpdateComment, onB
               isMine && { label: 'Yorumu düzenle', onClick: () => setIsEditing(true) },
               (isManager || isMine) && { label: 'Yorumu sil', onClick: () => onDeleteComment(comment.id, comment.postId) },
               isManager
-                && comment.uid !== currentUid
-                && members.some((member) => member.uid === comment.uid && member.role !== 'owner')
-                && { label: 'Üyeyi banla', onClick: () => onBan(comment.uid), danger: true },
+              && comment.uid !== currentUid
+              && members.some((member) => member.uid === comment.uid && member.role !== 'owner')
+              && { label: 'Üyeyi banla', onClick: () => onBan(comment.uid), danger: true },
               isManager
-                && comment.uid !== currentUid
-                && members.some((member) => member.uid === comment.uid && member.role !== 'admin' && member.role !== 'owner')
-                && { label: 'Admin yap', onClick: () => onRoleChange(comment.uid, 'admin') },
+              && comment.uid !== currentUid
+              && members.some((member) => member.uid === comment.uid && member.role !== 'admin' && member.role !== 'owner')
+              && { label: 'Admin yap', onClick: () => onRoleChange(comment.uid, 'admin') },
             ]}
           />
         </div>
@@ -591,13 +587,13 @@ function PostCard({
             isMine && { label: 'Gönderiyi düzenle', onClick: () => setIsEditing(true) },
             (isManager || isMine) && { label: 'Gönderiyi sil', onClick: () => onDeletePost(post.id) },
             isManager
-              && post.uid !== currentUid
-              && members.some((member) => member.uid === post.uid && member.role !== 'owner')
-              && { label: 'Üyeyi banla', onClick: () => onBan(post.uid), danger: true },
+            && post.uid !== currentUid
+            && members.some((member) => member.uid === post.uid && member.role !== 'owner')
+            && { label: 'Üyeyi banla', onClick: () => onBan(post.uid), danger: true },
             isManager
-              && post.uid !== currentUid
-              && members.some((member) => member.uid === post.uid && member.role !== 'admin' && member.role !== 'owner')
-              && { label: 'Admin yap', onClick: () => onRoleChange(post.uid, 'admin') },
+            && post.uid !== currentUid
+            && members.some((member) => member.uid === post.uid && member.role !== 'admin' && member.role !== 'owner')
+            && { label: 'Admin yap', onClick: () => onRoleChange(post.uid, 'admin') },
           ]}
         />
       </div>
@@ -747,13 +743,13 @@ function ChatMessage({ message, isManager, onDeleteMessage, onUpdateMessage, onM
               isMine && { label: 'Mesajı düzenle', onClick: () => setIsEditing(true) },
               (isManager || isMine) && { label: 'Mesajı sil', onClick: () => onDeleteMessage(message.id) },
               isManager
-                && message.uid !== currentUid
-                && members.some((member) => member.uid === message.uid && member.role !== 'owner')
-                && { label: 'Üyeyi banla', onClick: () => onBan(message.uid), danger: true },
+              && message.uid !== currentUid
+              && members.some((member) => member.uid === message.uid && member.role !== 'owner')
+              && { label: 'Üyeyi banla', onClick: () => onBan(message.uid), danger: true },
               isManager
-                && message.uid !== currentUid
-                && members.some((member) => member.uid === message.uid && member.role !== 'admin' && member.role !== 'owner')
-                && { label: 'Admin yap', onClick: () => onRoleChange(message.uid, 'admin') },
+              && message.uid !== currentUid
+              && members.some((member) => member.uid === message.uid && member.role !== 'admin' && member.role !== 'owner')
+              && { label: 'Admin yap', onClick: () => onRoleChange(message.uid, 'admin') },
             ]}
           />
         </div>
@@ -763,9 +759,8 @@ function ChatMessage({ message, isManager, onDeleteMessage, onUpdateMessage, onM
             <input
               value={draft}
               onChange={(event) => setDraft(event.target.value)}
-              className={`min-w-0 flex-1 rounded-full border border-white/40 px-3 py-2 text-xs font-bold outline-none ${
-                isMine ? 'bg-[#E9F5FF]/15 text-[#E9F5FF]' : 'bg-white/70 text-[#092F64]'
-              }`}
+              className={`min-w-0 flex-1 rounded-full border border-white/40 px-3 py-2 text-xs font-bold outline-none ${isMine ? 'bg-[#E9F5FF]/15 text-[#E9F5FF]' : 'bg-white/70 text-[#092F64]'
+                }`}
             />
             <button type="button" onClick={save} className="rounded-full bg-[#E9F5FF] px-3 py-2 text-xs font-black text-[#092F64]">
               Kaydet
@@ -917,9 +912,8 @@ function RoomSidePanel({ community, joined, onJoinToggle, busy }) {
           type="button"
           onClick={onJoinToggle}
           disabled={busy}
-          className={`mt-4 w-full rounded-full px-5 py-3 text-sm font-black transition disabled:cursor-wait disabled:opacity-60 ${
-            joined ? 'bg-[#E9F5FF] text-[#092F64]' : 'bg-[#092F64] text-[#E9F5FF]'
-          }`}
+          className={`mt-4 w-full rounded-full px-5 py-3 text-sm font-black transition disabled:cursor-wait disabled:opacity-60 ${joined ? 'bg-[#E9F5FF] text-[#092F64]' : 'bg-[#092F64] text-[#E9F5FF]'
+            }`}
         >
           {joined ? 'Topluluktan çık' : getJoinLabel(community, null)}
         </button>
@@ -1062,7 +1056,7 @@ function ManagementTab({ requests, members, currentUid, onApprove, onReject, onB
         <div className="mt-5 space-y-3">
           {requests.map((request) => (
             <div key={request.id} className="rounded-[24px] bg-[#E9F5FF]/70 p-4">
-                <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3">
                 <AvatarBadge avatarId={request.avatarId} name={request.displayName} />
                 <div>
                   <p className="theme-title text-sm font-black text-[#092F64]">{request.displayName || 'MAKÜLink üyesi'}</p>
@@ -1214,9 +1208,8 @@ function CommunityRoom({
               key={tab}
               type="button"
               onClick={() => setActiveTab(tab)}
-              className={`shrink-0 rounded-full px-5 py-2.5 text-sm font-black transition ${
-                activeTab === tab ? 'bg-[#092F64] text-[#E9F5FF]' : 'bg-[#E9F5FF]/64 text-[#092F64]/70 hover:bg-white/70'
-              }`}
+              className={`shrink-0 rounded-full px-5 py-2.5 text-sm font-black transition ${activeTab === tab ? 'bg-[#092F64] text-[#E9F5FF]' : 'bg-[#E9F5FF]/64 text-[#092F64]/70 hover:bg-white/70'
+                }`}
             >
               {tab}
             </button>
@@ -1722,20 +1715,20 @@ export default function CommunitiesPage() {
                     >
                       Topluluk oluştur
                     </button>
-                  <div className="grid grid-cols-3 gap-3 rounded-[28px] border border-white/45 bg-[#E9F5FF]/60 p-3 text-center shadow-[0_18px_50px_rgba(9,47,100,0.08)]">
-                    <div className="rounded-[22px] bg-white/45 px-4 py-3">
-                      <p className="text-2xl font-black text-[#092F64]">{communities.length}</p>
-                      <p className="text-xs font-bold text-[#1F1F1F]/55">grup</p>
+                    <div className="grid grid-cols-3 gap-3 rounded-[28px] border border-white/45 bg-[#E9F5FF]/60 p-3 text-center shadow-[0_18px_50px_rgba(9,47,100,0.08)]">
+                      <div className="rounded-[22px] bg-white/45 px-4 py-3">
+                        <p className="text-2xl font-black text-[#092F64]">{communities.length}</p>
+                        <p className="text-xs font-bold text-[#1F1F1F]/55">grup</p>
+                      </div>
+                      <div className="rounded-[22px] bg-white/45 px-4 py-3">
+                        <p className="text-2xl font-black text-[#092F64]">{formatCount(totals.members)}</p>
+                        <p className="text-xs font-bold text-[#1F1F1F]/55">üye</p>
+                      </div>
+                      <div className="rounded-[22px] bg-white/45 px-4 py-3">
+                        <p className="text-2xl font-black text-[#092F64]">{Array.from(memberships.values()).filter((item) => item.status === 'active').length}</p>
+                        <p className="text-xs font-bold text-[#1F1F1F]/55">katıldığın</p>
+                      </div>
                     </div>
-                    <div className="rounded-[22px] bg-white/45 px-4 py-3">
-                      <p className="text-2xl font-black text-[#092F64]">{formatCount(totals.members)}</p>
-                      <p className="text-xs font-bold text-[#1F1F1F]/55">üye</p>
-                    </div>
-                    <div className="rounded-[22px] bg-white/45 px-4 py-3">
-                      <p className="text-2xl font-black text-[#092F64]">{Array.from(memberships.values()).filter((item) => item.status === 'active').length}</p>
-                      <p className="text-xs font-bold text-[#1F1F1F]/55">katıldığın</p>
-                    </div>
-                  </div>
                   </div>
                 </div>
               </header>
@@ -1746,11 +1739,10 @@ export default function CommunitiesPage() {
                     key={filter}
                     type="button"
                     onClick={() => setSelectedFilter(filter)}
-                    className={`shrink-0 rounded-full px-5 py-3 text-sm font-black transition ${
-                      selectedFilter === filter
-                        ? 'bg-[#092F64] text-[#E9F5FF] shadow-[0_16px_38px_rgba(9,47,100,0.18)]'
-                        : 'bg-white/45 text-[#092F64]/70 hover:-translate-y-0.5 hover:bg-white/65'
-                    }`}
+                    className={`shrink-0 rounded-full px-5 py-3 text-sm font-black transition ${selectedFilter === filter
+                      ? 'bg-[#092F64] text-[#E9F5FF] shadow-[0_16px_38px_rgba(9,47,100,0.18)]'
+                      : 'bg-white/45 text-[#092F64]/70 hover:-translate-y-0.5 hover:bg-white/65'
+                      }`}
                   >
                     {filter}
                   </button>
@@ -1772,7 +1764,7 @@ export default function CommunitiesPage() {
                   ))}
                 </section>
 
-                <aside className="hidden lg:block space-y-5 lg:sticky lg:top-28 lg:self-start">
+                <aside className="space-y-5 lg:sticky lg:top-28 lg:self-start">
                   <section className="theme-card rounded-[30px] border border-white/50 bg-white/38 p-5 shadow-[0_22px_70px_rgba(9,47,100,0.10)] backdrop-blur-2xl">
                     <p className="text-xs font-black uppercase tracking-[0.18em] text-[#468BE6]">Gerçek zamanlı</p>
                     <h2 className="theme-title mt-2 text-2xl font-black text-[#092F64]">Grup hareketi</h2>

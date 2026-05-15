@@ -130,7 +130,7 @@ function getPasswordIssues(password) {
     issues.push('sayı')
   }
 
-  if (!/[^a-zA-Z0-9\sçğıöşüÇĞİÖŞÜ]/.test(password)) {
+  if (!/[^\w\sçğıöşüÇĞİÖŞÜ]/.test(password)) {
     issues.push('özel karakter')
   }
 
@@ -199,13 +199,13 @@ function recordRateLimitAttempt(action, email) {
         resetAt: state.resetAt || Date.now() + rule.windowMs,
       }),
     )
-  } catch {}
+  } catch { }
 }
 
 function clearRateLimit(action, email) {
   try {
     window.localStorage.removeItem(getRateLimitKey(action, email))
-  } catch {}
+  } catch { }
 }
 
 function Field({ label, type = 'text', value, placeholder, onChange, onFocus, onBlur }) {
@@ -236,11 +236,10 @@ function AuthToast({ status, message }) {
 
   return (
     <motion.div
-      className={`fixed left-1/2 top-4 z-[70] w-[calc(100vw-32px)] max-w-[360px] -translate-x-1/2 rounded-[18px] border px-4 py-3 text-xs font-black leading-5 shadow-[0_22px_70px_rgba(9,47,100,0.18)] backdrop-blur-2xl sm:right-4 sm:left-auto sm:w-auto sm:translate-x-0 ${
-        isSuccess
+      className={`fixed left-1/2 top-4 z-[70] w-[calc(100vw-32px)] max-w-[360px] -translate-x-1/2 rounded-[18px] border px-4 py-3 text-xs font-black leading-5 shadow-[0_22px_70px_rgba(9,47,100,0.18)] backdrop-blur-2xl sm:right-4 sm:left-auto sm:w-auto sm:translate-x-0 ${isSuccess
           ? 'border-white/65 bg-[#E9F5FF]/90 text-[#092F64]'
           : 'border-white/65 bg-white/85 text-[#1A5799]'
-      }`}
+        }`}
       initial={{ opacity: 0, y: -12, scale: 0.94 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ duration: 0.28, ease }}
@@ -449,10 +448,24 @@ export default function AuthCard({ onMascotState, onSuccess }) {
     }, timeout)
   }
 
-  const finishAuth = (delay = 900) => {
+  const finishAuth = async (delay = 900) => {
+    try {
+      await auth.currentUser?.reload()
+    } catch { }
+
+    const verifiedUser = auth.currentUser
+
+    if (!verifiedUser?.emailVerified) {
+      setStatus('verification')
+      setVerificationEmail(verifiedUser?.email || values.email)
+      setMessage('Doğrulama henüz Firebase tarafında görünmüyor. Maildeki linke tıkladıysan birkaç saniye sonra tekrar kontrol et.')
+      onMascotState('typing')
+      return
+    }
+
     setStatus('success')
     onMascotState('success')
-    window.setTimeout(() => onSuccess?.(auth.currentUser), delay)
+    window.setTimeout(() => onSuccess?.(verifiedUser), delay)
   }
 
   const saveUserProfile = async (user, overrides = {}) => {
@@ -530,7 +543,7 @@ export default function AuthCard({ onMascotState, onSuccess }) {
         console.warn('User verification status could not be saved yet:', profileError)
       }
 
-      finishAuth(2800)
+      await finishAuth(2800)
     } catch (error) {
       showMessage('error', getAuthErrorMessage(error), 2400)
     }
@@ -552,13 +565,15 @@ export default function AuthCard({ onMascotState, onSuccess }) {
       setStatus('loading')
       const credential = await signInWithEmailAndPassword(auth, values.email.trim(), values.password)
       clearRateLimit('login', values.email)
+      await credential.user.reload()
+      const signedInUser = auth.currentUser || credential.user
 
-      if (!credential.user.emailVerified) {
-        await sendVerification(credential.user)
+      if (!signedInUser.emailVerified) {
+        await sendVerification(signedInUser)
         return
       }
 
-      finishAuth()
+      await finishAuth()
     } catch (error) {
       recordRateLimitAttempt('login', values.email)
       showMessage('error', error?.code === 'auth/invalid-email' ? getAuthErrorMessage(error) : 'E-posta veya şifre hatalı görünüyor.', 2600)
@@ -749,9 +764,8 @@ export default function AuthCard({ onMascotState, onSuccess }) {
             <button
               key={key}
               onClick={() => switchMode(key)}
-              className={`relative rounded-full px-5 py-2 text-sm font-black transition ${
-                mode === key ? 'text-[#E9F5FF]' : 'text-[#092F64]/65 hover:text-[#092F64]'
-              }`}
+              className={`relative rounded-full px-5 py-2 text-sm font-black transition ${mode === key ? 'text-[#E9F5FF]' : 'text-[#092F64]/65 hover:text-[#092F64]'
+                }`}
             >
               {mode === key && (
                 <motion.span
@@ -767,7 +781,7 @@ export default function AuthCard({ onMascotState, onSuccess }) {
 
         <div className="mb-6">
           <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#468BE6]">
-            {mode === 'login' ? 'Hoş geldin' : 'Kampüse katıl'}
+            {mode === 'login' ? 'Tekrar hoş geldin' : 'Kampüse katıl'}
           </p>
           <h1 className="mt-2 text-4xl font-black tracking-normal text-[#092F64]">
             {mode === 'login' ? 'Spotların seni bekliyor.' : 'İlk spotunu beraber açalım.'}
@@ -883,11 +897,11 @@ export default function AuthCard({ onMascotState, onSuccess }) {
             ? 'Spotlara geçiliyor...'
             : status === 'loading'
               ? 'Kontrol ediliyor...'
-            : mode === 'login'
-              ? 'Kampüse gir'
-              : registerStep < finalRegisterStep
-                ? 'Devam et'
-                : 'Hesabı oluştur'}
+              : mode === 'login'
+                ? 'Kampüse gir'
+                : registerStep < finalRegisterStep
+                  ? 'Devam et'
+                  : 'Hesabı oluştur'}
         </motion.button>
       </div>
     </motion.div>

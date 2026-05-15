@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
-import { useNavigate } from 'react-router-dom' 
+import { useNavigate } from 'react-router-dom'
 import { doc, onSnapshot } from 'firebase/firestore'
 import Navbar from '../components/Navbar/Navbar.jsx'
 import { auth, db } from '../FireBase/firebaseConfig.js'
@@ -52,7 +52,7 @@ function ShortcutItem({ label, meta, icon, onClick }) {
 }
 
 export default function Home() {
-  const navigate = useNavigate() 
+  const navigate = useNavigate()
   const [profile, setProfile] = useState({ name: getAuthorName(), avatarId: 'women' })
   const [spots, setSpots] = useState([])
   const [comments, setComments] = useState([])
@@ -102,7 +102,7 @@ export default function Home() {
   const handleCreateSpot = async (payload) => {
     try {
       await createCampusSpot(payload)
-      if (auth.currentUser) recordSpotResult(auth.currentUser.uid).catch(() => {})
+      if (auth.currentUser) recordSpotResult(auth.currentUser.uid).catch(() => { })
       setNotice('Spot yayında.')
     } catch { setNotice('Hata oluştu.') }
   }
@@ -111,7 +111,7 @@ export default function Home() {
     <section className="app-page relative min-h-screen overflow-x-hidden bg-[#E9F5FF] text-[#1F1F1F]">
       <HomeBackground />
 
-      <Navbar/>
+      <Navbar />
 
       {notice && (
         <motion.div className="fixed bottom-6 right-6 z-50 rounded-full border border-white/55 bg-[#E9F5FF]/92 px-5 py-3 text-sm font-black text-[#092F64] shadow-2xl backdrop-blur-2xl" initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }}>
@@ -120,7 +120,7 @@ export default function Home() {
       )}
 
       <main className="relative z-10 mx-auto grid w-full max-w-[1560px] grid-cols-1 gap-6 px-4 py-7 pb-32 lg:grid-cols-[280px_minmax(0,1fr)_380px] lg:px-8 lg:pb-10">
-        
+
 
         <aside className="hidden lg:block space-y-5 lg:sticky lg:top-28 lg:self-start">
           <div className="rounded-[28px] border border-white/40 bg-white/30 p-4 shadow-sm backdrop-blur-2xl">
@@ -165,7 +165,7 @@ export default function Home() {
           <header>
             <p className="text-xs font-black uppercase tracking-[0.18em] text-[#468BE6]">Canlı akış</p>
             <h2 className="text-3xl font-black text-[#092F64]">Kampüs spotları</h2>
-            
+
             <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
               {[
                 ['🔥', `${stats.spots} spot`, 'aktif'],
@@ -189,19 +189,19 @@ export default function Home() {
               <div className="p-10 text-center font-bold text-[#092F64]/40 bg-white/20 rounded-[30px]">Henüz spot yok.</div>
             ) : (
               visibleSpots.map((spot) => (
-                
-<SpotCard
-  key={spot.id}
-  spot={spot}
-  comments={commentsBySpot[spot.id] || []}
-onComment={(spotId, commentText) => createCampusSpotComment({ spotId, text: commentText })}
-  onUpdate={updateCampusSpot}
-  onDelete={deleteCampusSpot}
-  onReaction={toggleCampusSpotReaction}
-  onUpdateComment={updateCampusSpotComment}
-  onDeleteComment={deleteCampusSpotComment}
-  onViewProfile={(u) => navigate(`/user/${u.uid}`)}
-/>
+
+                <SpotCard
+                  key={spot.id}
+                  spot={spot}
+                  comments={commentsBySpot[spot.id] || []}
+                  onComment={(spotId, commentText) => createCampusSpotComment({ spotId, text: commentText })}
+                  onUpdate={updateCampusSpot}
+                  onDelete={deleteCampusSpot}
+                  onReaction={toggleCampusSpotReaction}
+                  onUpdateComment={updateCampusSpotComment}
+                  onDeleteComment={deleteCampusSpotComment}
+                  onViewProfile={(u) => navigate(`/user/${u.uid}`)}
+                />
               ))
             )}
           </div>
@@ -223,15 +223,15 @@ onComment={(spotId, commentText) => createCampusSpotComment({ spotId, text: comm
           </section>
 
           <section className="rounded-[28px] border border-white/15 bg-[#092F64] p-6 text-[#E9F5FF] shadow-xl">
-             <p className="text-[10px] font-black uppercase tracking-widest text-[#93BFEF]">Trend</p>
-             <h3 className="mt-2 text-xl font-black">Kampüs Liderleri</h3>
-             <p className="mt-3 text-xs font-semibold leading-5 text-[#E9F5FF]/70">Haftalık en çok spot bırakan ve etkileşim alan öğrenciler sıralanıyor.</p>
-             <button onClick={() => navigate('/leaderboard')} className="mt-5 w-full rounded-xl bg-white py-3 text-sm font-black text-[#092F64] hover:bg-[#E9F5FF] transition">Leaderboard'a Bak</button>
+            <p className="text-[10px] font-black uppercase tracking-widest text-[#93BFEF]">Trend</p>
+            <h3 className="mt-2 text-xl font-black">Kampüs Liderleri</h3>
+            <p className="mt-3 text-xs font-semibold leading-5 text-[#E9F5FF]/70">Haftalık en çok spot bırakan ve etkileşim alan öğrenciler sıralanıyor.</p>
+            <button onClick={() => navigate('/leaderboard')} className="mt-5 w-full rounded-xl bg-white py-3 text-sm font-black text-[#092F64] hover:bg-[#E9F5FF] transition">Leaderboard'a Bak</button>
           </section>
         </aside>
 
       </main>
-      
+
       <Footer />
     </section>
   )

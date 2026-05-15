@@ -75,7 +75,7 @@ export default function ExamPage() {
         [user.uid]: true,
       },
       updatedAt: serverTimestamp(),
-    }, { merge: true }).catch(() => {})
+    }, { merge: true }).catch(() => { })
     setRoomCode(initialCode)
     setDuoMessage('Linkten duo odaya katıldın.')
   }, [])
@@ -125,7 +125,7 @@ export default function ExamPage() {
               isRunning: false,
               secondsLeft: 0,
               updatedAt: serverTimestamp(),
-            }, { merge: true }).catch(() => {})
+            }, { merge: true }).catch(() => { })
           }
 
           return 0
@@ -239,13 +239,13 @@ export default function ExamPage() {
     const fallbackRoom = roomSnapshot.exists()
       ? {}
       : {
-          modeId,
-          customMinutes,
-          secondsLeft,
-          isRunning,
-          startedAtMs: isRunning ? Date.now() : null,
-          createdAt: serverTimestamp(),
-        }
+        modeId,
+        customMinutes,
+        secondsLeft,
+        isRunning,
+        startedAtMs: isRunning ? Date.now() : null,
+        createdAt: serverTimestamp(),
+      }
 
     await setDoc(nextRoomRef, {
       ...fallbackRoom,
@@ -295,11 +295,10 @@ export default function ExamPage() {
                 key={mode.id}
                 type="button"
                 onClick={() => handleModeChange(mode.id)}
-                className={`rounded-[24px] px-5 py-4 text-left transition ${
-                  modeId === mode.id
+                className={`rounded-[24px] px-5 py-4 text-left transition ${modeId === mode.id
                     ? 'bg-[#092F64] text-[#E9F5FF] shadow-[0_14px_32px_rgba(9,47,100,0.18)]'
                     : 'theme-pill-muted text-[#092F64]/70 hover:bg-white/44'
-                }`}
+                  }`}
               >
                 <p className="text-lg font-black">{mode.label}</p>
                 <p className="mt-1 text-xs font-bold opacity-70">{mode.minutes} dk · {mode.description}</p>
@@ -388,7 +387,7 @@ export default function ExamPage() {
                   type="button"
                   onClick={() => {
                     const roomLink = `${window.location.origin}${window.location.pathname}?pomodoro=${roomCode}`
-                    navigator.clipboard?.writeText(roomLink).catch(() => {})
+                    navigator.clipboard?.writeText(roomLink).catch(() => { })
                     setDuoMessage('Duo link kopyalandı.')
                   }}
                   className="mt-3 rounded-2xl bg-[#092F64] px-4 py-2 text-xs font-black text-[#E9F5FF]"
