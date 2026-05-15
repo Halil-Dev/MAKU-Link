@@ -19,8 +19,6 @@ import { auth, db } from './FireBase/firebaseConfig.js'
 import { syncDailyCampusNotifications } from './services/notificationService.js'
 import { syncPublicProfile } from './services/publicProfileService.js'
 
-const LOADING_DURATION_MS = 1500
-
 function AnimatedRoutes({ isAuthenticated, onAuthenticated }) {
   const location = useLocation();
   const navigate = useNavigate();
@@ -71,7 +69,6 @@ function AnimatedRoutes({ isAuthenticated, onAuthenticated }) {
 }
 
 export default function App() {
-  const [isLoading, setIsLoading] = useState(true)
   const [isAuthReady, setIsAuthReady] = useState(false)
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const setAuthStateFromUser = (user) => {
@@ -103,11 +100,6 @@ export default function App() {
   }, [isAuthenticated])
 
   useEffect(() => {
-    const timer = window.setTimeout(() => setIsLoading(false), LOADING_DURATION_MS)
-    return () => window.clearTimeout(timer)
-  }, [])
-
-  useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setIsAuthenticated(Boolean(user?.emailVerified))
       setIsAuthReady(true)
@@ -127,7 +119,7 @@ export default function App() {
     return () => window.clearInterval(interval)
   }, [isAuthenticated])
 
-  if (isLoading || !isAuthReady) {
+  if (!isAuthReady) {
     return (
       <div className="min-h-screen bg-[#E9F5FF]">
         <LoadingScreen />
