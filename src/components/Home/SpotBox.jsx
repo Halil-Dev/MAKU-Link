@@ -59,6 +59,7 @@ export default function SpotBox({ profile, onCreate }) {
           <select
             value={location}
             onChange={(event) => setLocation(event.target.value)}
+            aria-label="Konum Seçimi"
             className="rounded-full border border-white/55 bg-[#E9F5FF]/75 px-3 py-2 text-xs font-black text-[#1A5799] outline-none"
           >
             {locationOptions.map((item) => (
