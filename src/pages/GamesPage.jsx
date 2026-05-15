@@ -615,7 +615,7 @@ export default function GamesPage() {
     <div className="min-h-screen bg-[#E9F5FF]">
       <Navbar />
 
-      <main className="mx-auto max-w-[1200px] p-6 pt-24">
+      <main className="mx-auto max-w-[1200px] p-6 pt-24 pb-32 lg:pb-10">
         <AnimatePresence mode="wait">
           {!activeGame ? (
             <motion.div key="list" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}>

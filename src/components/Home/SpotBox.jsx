@@ -66,7 +66,7 @@ export default function SpotBox({ profile, onCreate }) {
             ))}
           </select>
 
-          <div className="flex gap-1.5 overflow-x-auto pb-1 sm:pb-0">
+          <div className="flex flex-wrap gap-1.5 pb-1 sm:pb-0">
             {spotTypes.map((item) => (
               <button
                 key={item.id}

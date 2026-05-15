@@ -160,9 +160,7 @@ export default function MascotAnimation({ state = 'idle', cursor = { x: 0, y: 0 
           animate={{
             opacity: isError ? 0 : isPassword ? 0.24 : 0.72,
             pathLength: isSuccess ? [0, 1] : 1,
-            d: isSuccess
-              ? ['M116 83 C124 89 136 89 144 83', 'M114 82 C124 94 138 94 146 82', 'M116 83 C124 89 136 89 144 83']
-              : 'M116 83 C124 89 136 89 144 83',
+            d: 'M116 83 C124 89 136 89 144 83',
           }}
           transition={{ duration: 0.5, ease }}
         />
